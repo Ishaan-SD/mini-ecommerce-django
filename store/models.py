@@ -12,7 +12,7 @@ class Product(models.Model):
     price = models.DecimalField(u'Price', decimal_places=2, max_digits=12, validators=[MinValueValidator(Decimal('0.01'))])
     # u'Price' is unicode string so this field should be labeled as 'Price'. If any translation is applied to the site then
     # this label can be shown in other languages as well
-    image = models.ImageField(upload_to='static/images', blank=True, null=True)
+    image = models.ImageField(upload_to='images', blank=True, null=True)
 
     def __str__(self):
         return self.name

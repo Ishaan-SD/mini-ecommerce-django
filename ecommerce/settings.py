@@ -25,7 +25,14 @@ SECRET_KEY = "django-insecure-sjbf7tmludqon@8%@zg2r4x4a6y(5(-g-8^xfyuuo%!tw$8xd_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']  # dev only; lets Django accept any host
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.app.github.dev',  # all GitHub Codespaces URLs
+    'https://localhost:8000',     # also ok if you hit localhost
+    'http://127.0.0.1:8000'
+    'https://jubilant-goldfish-jj9957r94v93q9qv-8000.app.github.dev/'
+]
 
 
 # Application definition
@@ -38,6 +45,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
+
+EXTERNAL_APPS = [
+    'store',
+]
+
+INSTALLED_APPS += EXTERNAL_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -120,3 +133,8 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+import os
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
